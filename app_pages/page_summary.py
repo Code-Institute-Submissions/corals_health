@@ -24,6 +24,6 @@ def business_case() -> None:
 
     st.success(
         f"The project has 2 business requirements:\n"
-        f"* 1 - The client is interested in having a study to differentiate 'healthy', 'bleached' and 'dead' corals"        
+        f"* 1 - The client is interested in having a study to differentiate 'healthy', 'bleached' and 'dead' corals'\n"        
         f"* 2 - The client is interested to tell whether a given segment/part of coral colony is healthy, suffers from bleaching phenomenon or dead based on the analysis of coral images."
         )

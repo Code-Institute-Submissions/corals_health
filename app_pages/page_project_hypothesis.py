@@ -3,13 +3,13 @@ import matplotlib.pyplot as plt
 
 
 def page_project_hypothesis_body():
-    st.write("### Project Hypothesis and Validation")
+    st.write("### Project Hypothesis")
 
     st.success(
-        f"* We suspect malaria-parasitised cells have clear marks/signs, "
-        f"typically in the middle of the cell, that can differentiate them from an uninfected cell. \n\n"
-        f"* An Image Montage shows that typically a parasitised cell has purplish marks across it. "
-        f"Average Image, Variability Image and Difference between Averages studies did not reveal "
-        f"any clear pattern to differentiate one from another."
-
+        f"#### Healthy Corals:\n"
+        f"* Typically vibrant in color due to the presence of symbiotic algae. Colors can range from browns and greens to bright blues, reds, and yellows, depending on the species.\n"
+        f"#### Bleached Corals:\n"
+        f"* Appear white or pale because they have expelled their symbiotic algae. The coral's skeleton becomes visible through their translucent tissues.\n"
+        f"#### Dead Corals:\n"
+        f"* Often appear dull and covered in algae or overgrown by other organisms. The structure may begin to erode and break apart. They do not regain color and look more like bare rock."
     )
