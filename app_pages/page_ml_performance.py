@@ -2,11 +2,11 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import pandas as pd
 from matplotlib.image import imread
-from src.machine_learning.evaluate_clf import load_test_evaluation
+from src.machine_learning.evaluate_clf import *
 
 
-def page_ml_performance_metrics():
-    version = 'v1'
+def page_ml_performance_metrics_body():
+    version = 'v4'
 
     st.write("### Train, Validation and Test Set: Labels Frequencies")
 
@@ -15,17 +15,42 @@ def page_ml_performance_metrics():
     st.write("---")
 
 
-    st.write("### Model History")
+    st.write("### Model_1 History")
     col1, col2 = st.beta_columns(2)
     with col1: 
-        model_acc = plt.imread(f"outputs/{version}/model_training_acc.png")
-        st.image(model_acc, caption='Model Training Accuracy')
+        model_1_acc = plt.imread(f"outputs/{version}/model_1_training_acc.png")
+        st.image(model_1_acc, caption='Model_1 Training Accuracy')
     with col2:
-        model_loss = plt.imread(f"outputs/{version}/model_training_losses.png")
-        st.image(model_loss, caption='Model Training Losses')
-    st.write("---")
-
-    st.write("### Generalised Performance on Test Set")
-    st.dataframe(pd.DataFrame(load_test_evaluation(version), index=['Loss', 'Accuracy']))
+        model_1_loss = plt.imread(f"outputs/{version}/model_1_training_losses.png")
+        st.image(model_1_loss, caption='Model_1 Training Losses')
     
+
+    st.write("### Generalised Performance on Test Set (Model_1)")
+    st.dataframe(pd.DataFrame(load_test_evaluation_model_1(version), index=['Loss', 'Accuracy']))
+    st.write("---")
+    
+    
+    st.write("### Model_2 History")
+    col1, col2 = st.beta_columns(2)
+    with col1: 
+        model_2_acc = plt.imread(f"outputs/{version}/model_2_training_acc.png")
+        st.image(model_2_acc, caption='Model_2 Training Accuracy')
+    with col2:
+        model_2_loss = plt.imread(f"outputs/{version}/model_2_training_losses.png")
+        st.image(model_2_loss, caption='Model_2 Training Losses')
+    st.write("### Generalised Performance on Test Set (Model_2)")
+    st.dataframe(pd.DataFrame(load_test_evaluation_model_2(version), index=['Loss', 'Accuracy']))
+    st.write("---")
+    
+    
+    st.write("### Model_3 History")
+    col1, col2 = st.beta_columns(2)
+    with col1: 
+        model_3_acc = plt.imread(f"outputs/{version}/model_3_training_acc.png")
+        st.image(model_3_acc, caption='Model_3 Training Accuracy')
+    with col2:
+        model_3_loss = plt.imread(f"outputs/{version}/model_3_training_losses.png")
+        st.image(model_3_loss, caption='Model_3 Training Losses')
+    st.write("### Generalised Performance on Test Set (Model_3)")
+    st.dataframe(pd.DataFrame(load_test_evaluation_model_3(version), index=['Loss', 'Accuracy']))
     
