@@ -2,35 +2,10 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import plotly.express as px
+import seaborn as sns
 from tensorflow.keras.models import load_model
 from PIL import Image
 from src.data_management import load_pkl_file
-
-
-def plot_predictions_probabilities(pred_proba, pred_class):
-    """
-    Plot prediction probability results
-    """
-
-    prob_per_class = pd.DataFrame(
-        data=[0, 0],
-        index={'Parasitised': 0, 'Uninfected': 1}.keys(),
-        columns=['Probability']
-    )
-    prob_per_class.loc[pred_class] = pred_proba
-    for x in prob_per_class.index.to_list():
-        if x not in pred_class:
-            prob_per_class.loc[x] = 1 - pred_proba
-    prob_per_class = prob_per_class.round(3)
-    prob_per_class['Diagnostic'] = prob_per_class.index
-
-    fig = px.bar(
-        prob_per_class,
-        x='Diagnostic',
-        y=prob_per_class['Probability'],
-        range_y=[0, 1],
-        width=600, height=300, template='seaborn')
-    st.plotly_chart(fig)
 
 
 def resize_input_image(img, version):
@@ -49,17 +24,63 @@ def load_model_and_predict(my_image, version):
     Load and perform ML prediction over live images
     """
 
-    model = load_model(f"outputs/{version}/malaria_detector_model.h5")
+    target_map = {v: k for k, v in {'Bleached': 0, 'Dead': 1, 'Healthy': 2}.items()}
+    
+    model_1 = load_model(f"outputs/{version}/model_1.h5")
+    # model_2 = load_model(f"outputs/{version}/model_2.h5")
+    # model_3 = load_model(f"outputs/{version}/model_3.h5")
 
-    pred_proba = model.predict(my_image)[0, 0]
+    pred_proba_model_1 = model_1.predict(my_image)[0]
+    # pred_proba_model_2 = model_2.predict(my_image)[0]
+    # pred_proba_model_3 = model_3.predict(my_image)[0]    
+    
+    prob_per_class_model_1 = pd.DataFrame(data=pred_proba_model_1, columns=['Probability'])
+    # prob_per_class_model_2 = pd.DataFrame(data=pred_proba_model_2, columns=['Probability'])
+    # prob_per_class_model_3 = pd.DataFrame(data=pred_proba_model_3, columns=['Probability'])    
+    
+    prob_per_class_model_1 = prob_per_class_model_1.round(3)
+    # prob_per_class_model_2 = prob_per_class_model_2.round(3)
+    # prob_per_class_model_3 = prob_per_class_model_3.round(3)
+    
+    prob_per_class_model_1['Results'] = target_map.values()
+    # prob_per_class_model_2['Results'] = target_map.values()
+    # prob_per_class_model_3['Results'] = target_map.values()
+    
+    combined_df = pd.concat([
+    prob_per_class_model_1.assign(Model='Model 1')#,
+    # prob_per_class_model_2.assign(Model='Model 2'),
+    # prob_per_class_model_3.assign(Model='Model 3')
+])
+    
+    fig = px.bar(
+    combined_df,
+    x='Model',
+    y='Probability',
+    color='Results',
+    barmode='group',
+    range_y=[0, 1],
+    width=600,
+    height=400,
+    template='seaborn',
+    title="Probability by Model"
+)
 
-    target_map = {v: k for k, v in {'Parasitised': 0, 'Uninfected': 1}.items()}
-    pred_class = target_map[pred_proba > 0.5]
-    if pred_class == target_map[0]:
-        pred_proba = 1 - pred_proba
+    
+    st.plotly_chart(fig)
+    """
+    # Plot the bar chart, grouped by Coral Health State (Results)
+    fig = px.bar(
+    combined_df,
+    x='Results',
+    y='Probability',
+    color='Model',
+    barmode='group',
+    range_y=[0, 1],
+    width=600,
+    height=400,
+    template='seaborn',
+    title="Probability by Coral Health State"
+)
 
-    st.write(
-        f"The predictive analysis indicates the sample cell is "
-        f"**{pred_class.lower()}** with malaria.")
-
-    return pred_proba, pred_class
+    fig.show()
+    """

@@ -2,8 +2,6 @@ import streamlit as st
 
 def business_case() -> None:
 
-    st.write("# Coral\'s Health")
-
     st.write("## Project Summary and business case")
 
     st.info(

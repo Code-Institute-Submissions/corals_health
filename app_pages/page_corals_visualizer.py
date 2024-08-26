@@ -9,27 +9,31 @@ from matplotlib.image import imread
 import itertools
 import random
 
-def page_cells_visualizer_body():
-    st.write("### Cells Visualizer")
+def page_corals_visualizer_body():
+    st.write("### Corals visualisation")
     st.info(
-        f"* The client is interested in having a study that visually "
-        f"differentiates a parasitised from an uninfected cell.")
+        f"* The client is interested in having a study that shows "
+        f"visually the difference between healthy, bleached and dead corals.")
     
-    version = 'v1'
-    if st.checkbox("Difference between average and variability image"):
+    version = 'v4'
+    if st.checkbox("Difference between averages for different groups"):
       
-      avg_parasitized = plt.imread(f"outputs/{version}/avg_var_Parasitized.png")
-      avg_uninfected = plt.imread(f"outputs/{version}/avg_var_Uninfected.png")
+      avg_healthy_bleached = plt.imread(f"outputs/{version}/avg_diff_healthy-bleached.png")
+      avg_healthy_dead = plt.imread(f"outputs/{version}/avg_diff_healthy_dead.png")
+      avg_bleached_dead = plt.imread(f"outputs/{version}/avg_diff_bleached_dead.png")      
 
-      st.warning(
-        f"* We notice the average and variability images did not show "
-        f"patterns where we could intuitively differentiate one from another. " 
-        f"However, a small difference in the colour pigment of the average images is seen for both labels.")
-
-      st.image(avg_parasitized, caption='Parasitised Cell - Average and Variability')
-      st.image(avg_uninfected, caption='Uninfected Cell - Average and Variability')
+      st.image(avg_healthy_bleached, caption='Difference between averages for Healthy and Bleached corals')
+      st.image(avg_healthy_dead, caption='Difference between averages for Healthy and Dead dorals')
+      st.image(avg_bleached_dead, caption='Difference between averages for Bleached and Dead corals')
       st.write("---")
-
+      st.warning(
+        f"*The observation is that on average there is very small difference\n"
+        f"between snapshots taken for healthy, bleached and dead corals.\n " 
+        f"Minor (some) difference is seen for pair 'healthy' - 'dead'.\n"
+        f"No visual difference was detedted for pairs 'healthy' - 'bleached' "
+        f"and 'bleached' - 'dead'."
+      )
+    """
     if st.checkbox("Differences between average parasitised and average uninfected cells"):
           diff_between_avgs = plt.imread(f"outputs/{version}/avg_diff.png")
 
@@ -37,19 +41,18 @@ def page_cells_visualizer_body():
             f"* We notice this study didn't show "
             f"patterns where we could intuitively differentiate one from another.")
           st.image(diff_between_avgs, caption='Difference between average images')
+    """
 
     if st.checkbox("Image Montage"): 
       st.write("* To refresh the montage, click on the 'Create Montage' button")
-      my_data_dir = 'inputs/malaria_dataset/cell_images'
-      labels = os.listdir(my_data_dir+ '/validation')
+      my_data_dir = os.path.join('inputs', 'corals-dataset', 'Dataset')
+      labels = os.listdir(os.path.join(my_data_dir, 'validation'))
       label_to_display = st.selectbox(label="Select label", options=labels, index=0)
       if st.button("Create Montage"):      
-        image_montage(dir_path= my_data_dir + '/validation',
+        image_montage(os.path.join(my_data_dir, 'validation'),
                       label_to_display=label_to_display,
-                      nrows=8, ncols=3, figsize=(10,25))
+                      nrows=5, ncols=3, figsize=(10,25))
       st.write("---")
-
-
 
 def image_montage(dir_path, label_to_display, nrows, ncols, figsize=(15,10)):
   sns.set_style("white")
@@ -60,7 +63,7 @@ def image_montage(dir_path, label_to_display, nrows, ncols, figsize=(15,10)):
 
     # checks if your montage space is greater than subset size
     # how many images in that folder
-    images_list = os.listdir(dir_path+'/'+ label_to_display)
+    images_list = os.listdir(os.path.join(dir_path, label_to_display))
     if nrows * ncols < len(images_list):
       img_idx = random.sample(images_list, nrows * ncols)
     else:
@@ -72,8 +75,8 @@ def image_montage(dir_path, label_to_display, nrows, ncols, figsize=(15,10)):
     
 
     # create list of axes indices based on nrows and ncols
-    list_rows= range(0,nrows)
-    list_cols= range(0,ncols)
+    list_rows= range(0, nrows)
+    list_cols= range(0, ncols)
     plot_idx = list(itertools.product(list_rows,list_cols))
 
 

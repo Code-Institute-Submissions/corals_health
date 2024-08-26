@@ -1,5 +1,41 @@
 # CORALS HEALTH
 
+## Introduction
+Welcome to the "Coral's Health" ML project. This project was instpired by several visits of the author to the Great Barrier Reef and observations of detrimantal effect of human activity on various colonies of corals.<br>
+<hr>
+<em>Insert nice image here for the decotation purpose</em>
+
+
+<hr>
+
+## ML pipeline
+The project story will be told following the workflow implied by a deployed ML pipeline, following main steps, including:
+1. * Business case understanding
+   * Data collection
+   * Cleaning
+   * Augmentation  
+2. * Data annotation, feature selection and scaling (if required)
+3. * Building and optimising model
+   * Model training and evaluation
+   * Model Deployment
+   * Model testing
+4. * Reporting prediction output
+
+## Project goals and potential benefits
+
+## Business requirements
+
+## Data collection, cleaning and preprocessing
+
+
+
+
+<hr>
+<hr>
+<hr>
+<hr>
+
+
 ## Model optimisation
 
 ### Model 1
@@ -15,3 +51,8 @@ The training results indicate that the model is performing well, with loss dropp
 
 
 ### Model 3
+
+
+## User Interface design
+
+## Deployment
