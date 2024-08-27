@@ -56,3 +56,6 @@ The training results indicate that the model is performing well, with loss dropp
 ## User Interface design
 
 ## Deployment
+
+## References
+1. [S. Jamil, M. Rahman, A. Haider, <em>Bag of features (BoF) based deep learning framework for bleached corals detection</em>, Big Data Cogn. Comput. <b>2021</b>, 5, 53.](https://www.mdpi.com/2504-2289/5/4/53)

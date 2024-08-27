@@ -12,8 +12,9 @@ import random
 def page_corals_visualizer_body():
     st.write("### Corals visualisation")
     st.info(
-        f"* The client is interested in having a study that shows "
-        f"visually the difference between healthy, bleached and dead corals.")
+        f"* The client is interested in having a capability to compare "
+        f"average images obtained for 'healthy', 'bleached' and 'dead' corals "
+        f"and check if these groups can be visually unambiguously categorised.")
     
     version = 'v4'
     if st.checkbox("Difference between averages for different groups"):
@@ -27,7 +28,7 @@ def page_corals_visualizer_body():
       st.image(avg_bleached_dead, caption='Difference between averages for Bleached and Dead corals')
       st.write("---")
       st.warning(
-        f"*The observation is that on average there is very small difference\n"
+        f"* The observation is that on average there is very small difference\n"
         f"between snapshots taken for healthy, bleached and dead corals.\n " 
         f"Minor (some) difference is seen for pair 'healthy' - 'dead'.\n"
         f"No visual difference was detedted for pairs 'healthy' - 'bleached' "
