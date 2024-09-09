@@ -1,2 +1,4 @@
+inputs/corals-dataset/Dataset/test
+inputs/corals-dataset/Dataset/train
 kaggle.json
 __pycache__/
