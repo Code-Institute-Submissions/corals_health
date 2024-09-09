@@ -11,16 +11,16 @@ from PIL import Image
 def page_models_explained_body():
     st.success("### Summary and structure of models used in the Project")
     version = 'v4'
-    model_1 = load_model(f"outputs/{version}/model_1.h5")
+    # model_1 = load_model(f"outputs/{version}/model_1.h5")
     model_2 = load_model(f"outputs/{version}/model_2.h5")
     model_3 = load_model(f"outputs/{version}/model_3.h5")    
     
-    st.info("#### Model_1")
+    # st.info("#### Model_1")
     
-    stringlist_1 = []
-    model_1.summary(print_fn=lambda x: stringlist_1.append(x))
-    summary_string_1 = "\n".join(stringlist_1)
-    st.text(summary_string_1)
+    # stringlist_1 = []
+    # model_1.summary(print_fn=lambda x: stringlist_1.append(x))
+    # summary_string_1 = "\n".join(stringlist_1)
+    # st.text(summary_string_1)
     
     model_1_code = '''
     def create_tf_model_1():
@@ -50,8 +50,8 @@ def page_models_explained_body():
         return model
     '''
     
-    if st.checkbox('Show Model_1 code'):
-        st.code(model_1_code, language='python')
+    # if st.checkbox('Show Model_1 code'):
+    #     st.code(model_1_code, language='python')
     
         
     st.write("---")
