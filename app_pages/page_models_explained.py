@@ -2,7 +2,6 @@ import requests
 import os
 import streamlit as st
 from tensorflow.keras.models import load_model
-import matplotlib.pyplot as plt
 from PIL import Image
 
 def download_model(url, local_path):

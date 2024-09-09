@@ -1,5 +1,7 @@
 inputs/corals-dataset/Dataset/test
 inputs/corals-dataset/Dataset/train
-*.h5
+saved_models/model_1.h5
+saved_models/model_2.h5
+saved_models/model_3.h5
 kaggle.json
 __pycache__/
