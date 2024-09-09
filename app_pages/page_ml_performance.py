@@ -15,19 +15,19 @@ def page_ml_performance_metrics_body():
     st.write("---")
 
 
-    # st.write("### Model_1 History")
-    # col1, col2 = st.beta_columns(2)
-    # with col1: 
-    #     model_1_acc = plt.imread(f"outputs/{version}/model_1_training_acc.png")
-    #     st.image(model_1_acc, caption='Model_1 Training Accuracy')
-    # with col2:
-    #     model_1_loss = plt.imread(f"outputs/{version}/model_1_training_losses.png")
-    #     st.image(model_1_loss, caption='Model_1 Training Losses')
+    st.write("### Model_1 History")
+    col1, col2 = st.beta_columns(2)
+    with col1: 
+        model_1_acc = plt.imread(f"outputs/{version}/model_1_training_acc.png")
+        st.image(model_1_acc, caption='Model_1 Training Accuracy')
+    with col2:
+        model_1_loss = plt.imread(f"outputs/{version}/model_1_training_losses.png")
+        st.image(model_1_loss, caption='Model_1 Training Losses')
     
 
-    # st.write("### Generalised Performance on Test Set (Model_1)")
-    # st.dataframe(pd.DataFrame(load_test_evaluation_model_1(version), index=['Loss', 'Accuracy']))
-    # st.write("---")
+    st.write("### Generalised Performance on Test Set (Model_1)")
+    st.dataframe(pd.DataFrame(load_test_evaluation_model_1(version), index=['Loss', 'Accuracy']))
+    st.write("---")
     
     
     st.write("### Model_2 History")

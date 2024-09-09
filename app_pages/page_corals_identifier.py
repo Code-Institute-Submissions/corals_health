@@ -36,21 +36,7 @@ def page_corals_identifier_body():
 
             version = 'v4'
             resized_img = resize_input_image(img=img_pil, version=version)
-            load_model_and_predict(resized_img, version=version)
-            # prob_per_class_model_1, prob_per_class_model_2, prob_per_class_model_3 = load_model_and_predict(resized_img,
-            # version=version)
-            # plot_predictions_probabilities(pred_proba, pred_class)
-            # st.success(prob_per_class_model_1)
-            # st.info('---')
-            # st.success(prob_per_class_model_2)
-            # st.info('---')
-            # st.success(prob_per_class_model_3)
-            
-            
-            
-
-            # df_report = df_report.append({"Name":image.name, 'Result': pred_class },
-            #                             ignore_index=True)
+            load_model_and_predict(resized_img, version=version)            
         
         if not df_report.empty:
             st.success("Analysis Report")
