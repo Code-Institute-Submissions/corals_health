@@ -64,6 +64,7 @@ This goal will be achieved via addressing two business objectives:
 #### [Notes](#notes)
 <hr>
 <hr>
+
 ### CRISP-DM Methodology
 
 #### Business Understanding
@@ -270,6 +271,8 @@ The loss and accuracy curves for loss and accuracy during training and validatio
 **Model_3:**
 
 ![Model_3_accuracy](./assets/images/model_3_training_acc.png) ![Model_3_loss](./assets/images/model_3_training_losses.png)
+
+**Based on the results of model training and [model evaluation](#model-evaluation), the author choose model_3 for deployment**
 
 ### III. Jupyter Notebooks
 

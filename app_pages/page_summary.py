@@ -2,7 +2,11 @@ import streamlit as st
 
 def business_case() -> None:
 
-    st.write("## Project Summary and business case")
+    st.write("## Project Summary and Business Case")
+    
+    st.image('assets/images/coral-reef-title-image.jpg', use_column_width=True)
+    
+    st.markdown('[Image source](https://www.anses.fr/en/content/coral-reefs-french-overseas-territories)')
 
     st.info(
         f"* Coral bleaching is the process when corals become white due to loss of symbiotic algae and photosynthetic pigments. This loss of pigment can be caused by various stressors, such as changes in ocean temperature (due to Global Warming), light, or nutrients. Bleaching occurs when coral polyps expel the zooxanthellae (dinoflagellates that are commonly referred to as algae) that live inside their tissue, causing the coral to turn white.\n"
@@ -11,6 +15,14 @@ def business_case() -> None:
         f"* According to the United Nations Environment Programme, between 2014 and 2016, the longest recorded global bleaching events killed coral on an unprecedented scale. In 2016, bleaching of coral on the Great Barrier Reef killed 29 to 50 percent of the reef's coral. In 2017, the bleaching extended into the central region of the reef. The average interval between bleaching events has halved between 1980 and 2016, [Wikipedia article](https://en.wikipedia.org/wiki/Coral_bleaching).\n"        
         )
 
+    
+
+    st.success(
+        f"**The project has two business requirements:**\n"
+        f"* 1 - The client is interested in having the capability to compare average images obtained for 'healthy', 'bleached' and 'dead' corals and check if these groups can be visually unambiguously categorised.\n"        
+        f"* 2 - To answer (by using a trained ML model) whether an uploaded (previously unseen) image was taken of a 'Healthy', 'Bleached' or 'Dead' coral."
+        )
+    
     st.write("## Dataset")
 
     st.info(
@@ -18,10 +30,4 @@ def business_case() -> None:
         )
 
     st.write(
-        f"* Additional information: [Project README file](https://github.com/.../README.md).\n")
-
-    st.success(
-        f"The project has 2 business requirements:\n"
-        f"* 1 - The client is interested in having a study to differentiate 'healthy', 'bleached' and 'dead' corals'\n"        
-        f"* 2 - The client is interested to tell whether a given segment/part of coral colony is healthy, suffers from bleaching phenomenon or dead based on the analysis of coral images."
-        )
+        f"* Additional information: [Project README file](https://github.com/DrSYakovlev/corals_health).\n")

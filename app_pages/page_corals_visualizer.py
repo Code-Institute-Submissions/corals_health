@@ -8,10 +8,14 @@ import random
 
 def page_corals_visualizer_body():
     st.write("### Corals visualisation")
-    st.info(
-        f"* The client is interested in having a capability to compare "
-        f"average images obtained for 'healthy', 'bleached' and 'dead' corals "
-        f"and check if these groups can be visually unambiguously categorised.")
+    st.info(                
+        f"The client is interested in having the capability to compare average\n"
+        f"images obtained for 'healthy', 'bleached', and 'dead' corals and check\n"
+        f"if these groups can be visually unambiguously categorized.")
+    
+    
+    
+    
     
     version = 'v4'
     if st.checkbox("Difference between averages for different groups"):
