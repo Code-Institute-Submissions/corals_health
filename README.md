@@ -38,16 +38,14 @@ This goal will be achieved via addressing two business objectives:
 * [2. Results and Visualisation](#results-and-visualisation)
 
 
-
-
 ### [IV. Streamlit Dashboard](#iv-streamlit-dashboard-1)
 * [1. Overview](#overview)
 * [2. Installation and Setup](#installation-and-setup)
 * [3. Backend Code: Features and Validation](#backend-code-features-and-validation)
-* [4. Dashboard Features]()
+* [4. Dashboard Features](#dashboard-features)
 * [5. User Guide](#user-guide)
 
-### [V. Conclusions and Future Work](#conclusions-and-future-work)
+### [V. Conclusions and Future Work](#v-conclusions-and-future-work-1)
 
 ### [VI. Dependencies and Requirements](#dependencies-and-requirements)
 
@@ -55,9 +53,15 @@ This goal will be achieved via addressing two business objectives:
 
 ### [VIII. Deployment](#deployment-2)
 
-#### Acknowledgements
+### [IX. Bugs](#bugs)
 
-#### Contact information
+### [X. Maintenance](#maintenance)
+
+#### [Credits](#credits-1)
+
+#### [Acknowledgements](#acknowledgements-1)
+
+#### [Contact information](#contact-information-1)
 
 #### [References](#references-1)
 
@@ -99,8 +103,6 @@ Models were evaluated based on accuracy and loss metrics using validation and te
 #### Deployment
 The trained models were deployed using a Streamlit dashboard, enabling users to upload coral images and receive real-time health predictions. This deployment facilitates easy access and usability for stakeholders.
 
-
-
 ### II. ML Pipeline
 
 #### Data Collection
@@ -108,7 +110,7 @@ Complete code used for data collection can be found in [1_data_collection.ipynb]
 * Cleaning:
 1) Check if the files which are not images are present (and deleting them).
 2) Checking if the dataset contains grayscale images (and deleting them).
-3) [Manual data check](#-1-).
+3) [Manual data check](#manual-data-check).
 * Dataset splitting:
 After data cleaning, the dataset was split into 'train', 'validadion' and 'test' subsets in the ratio 0.7/0.1/0.2. (see [1_data_collection.ipynb](./jupyter_notebooks/1_data_collection.ipynb)).
 
@@ -355,9 +357,7 @@ Streamlit dashboard is a multipage app featuring the following pages/sections:
 5. ML Performance Metrics
 6. Models Summary
 
-The user can navigate between sections using the dropdown menu:
 
-![Navigation dropdown list](./assets/images/streamlit-dropdown-list.jpg)
 
 #### Installation and Setup
 The app is deployed [here](https://corals-health-3265febe1ec7.herokuapp.com/), is ready to use and does not require additional setup or configuring steps.
@@ -369,6 +369,36 @@ The code was validated using [CI Python Linter](https://pep8ci.herokuapp.com/) w
 
 #### Dashboard features
 
+* The user can navigate between sections using the dropdown menu:
+
+![Navigation dropdown list](./assets/images/streamlit-dropdown-list.jpg)
+
+* **Business Case** page gives an overview of the **coral bleaching** effect, formulates business requirements and provides short description of the dataset:
+
+![Business Case](./assets/images/business_case_app_page.jpg)
+
+* **Project Hypothesis** page gives the description of criteria which will (hypothetically) be used by the model to perform the classification task:
+
+![Project Hypothesis](./assets/images/project_hypothesis_app_page.jpg)
+
+* **Corals Visualiser** page generates two sets of images set of images:
+1. Difference image between pairs of the groups: 'Dead' - 'Healthy', 'Dead' - 'Bleached' and 'Healthy' - 'Bleached', and
+2. Image Montage of selected group (selected from the drop-down list)
+
+![Corals Visualiser](./assets/images/visualiser_app_page.jpg)
+
+* **Corals State Idendifier** page, where a user can download (open file or drag-and-drop option) image or images of corals. The image(s) will be automatically processed and the [prediction results](#prediction-results) indicated in the form of a bar diagram, a message and a brief report:
+
+![Corals State Identifier](./assets/images/corals_state_identifier_app_page.jpg)
+
+![Report Summary](./assets/images/report_summary.jpg)
+
+* **ML Performance Metrics** page shows label distribution between 'train', 'validation' and 'test' subsets, model training history (loss and accuracy plots as function of epoch) and general model acccuracy:
+
+![Performance Metrics - 1](./assets/images/ML_performance_page-1.jpg)
+
+![Performance Metrics - 2](./assets/images/ML_performance_page-2.jpg)
+
 #### User Guide
 1. Using the dropdown menu, navigate to the 'Business Case', 'Project Hypothesis', 'ML Performance Metrics' or 'Model Summary' pages for more details, business requirements, model performance and structure. These sections are mostly informative.
 2. Navigate to the 'Corals Visualiser' to view typical/representative images of corals from different labelled groups.
@@ -379,11 +409,34 @@ The code was validated using [CI Python Linter](https://pep8ci.herokuapp.com/) w
 
 3. Navigate to the 'Corals State Identifier' to run prediction on previously unseen/unused images of corals. Simply upload or drag and drop image or images where indicated. It may take 10-15 seconds to process data, depending on you interned speed.
 
-### Conclusions and Future Work
+### <u>**V. Conclusions and Future Work**</u>
 
+####  Conclusions
+The "Corals Health" machine learning project successfully developed and deployed a Convolutional Neural Network (CNN) model to classify coral health into three categories: 'Healthy', 'Bleached', and 'Dead'. Through the CRISP-DM methodology, two key **business objectives** were addressed:
 
+* Visualizing and comparing average images from each coral health category.
+* Developing an automated classification system for unseen coral images.
 
+The [models](#model-building) achieved reasonable accuracy, with Model_3 performing the best in terms of balancing accuracy and generalization (85.2 % accuracy on the test set). Data augmentation and dropout layers proved essential in reducing overfitting and improving model robustness, though challenges with dataset quality, particularly mislabeling and cross-contamination, presented obstacles. Manual correction of these issues led to improved model performance, but the dataset's small size and cross-contamination limited the full potential of the models.
 
+The deployment of the trained models on a Streamlit dashboard allows for easy user interaction, enabling stakeholders to upload and classify coral images in real-time, fulfilling the project's key objectives. The results demonstrate the feasibility of using machine learning to aid in the monitoring and categorization of coral health, particularly in reducing manual labor and human error in image sorting tasks.
+
+#### Future Work
+Several areas of future work can improve upon the current project:
+
+* Dataset Expansion: The limited size of the dataset used in this project constrains the model's ability to generalize effectively. Future iterations should focus on expanding the dataset, including gathering more labeled images from various coral habitats and geographic regions.
+
+* Improved Labeling and Data Quality: Addressing the mislabeling and cross-contamination issues in the dataset would significantly improve model performance. Collaborating with coral experts to refine the dataset could ensure higher accuracy in future predictions.
+
+* Transfer Learning: Incorporating transfer learning from pre-trained models like ResNet or Inception could help improve model accuracy, especially when working with [small datasets](#references-1). These pre-trained models could allow faster training and better feature extraction.
+
+* Integration of Environmental Data: Including additional environmental variables (e.g., water temperature, pH levels, light exposure) could enhance the model's ability to predict coral health more accurately. The correlation between these factors and coral health could provide valuable insights for stakeholders.
+
+* Continuous Model Evaluation and Fine-Tuning: As new coral health data becomes available, continuously retraining and fine-tuning the model will help maintain and potentially improve its accuracy and relevance. This could include real-time updates to the model with freshly labeled coral images.
+
+* User Experience Enhancements: Future work could include improving the user interface of the Streamlit dashboard, more detailed reporting on model predictions.
+
+In conclusion, this project lays the foundation for the automated monitoring of coral health using machine learning, and with further refinement and expansion, it has the potential to contribute significantly to coral reef conservation efforts.
 
 ### Dependencies and Requirements
 
@@ -426,10 +479,21 @@ For a successful deploymetnt on [Heroku](https://www.heroku.com/) , the next fil
 
 This project was deployed in a manual mode following the steps, described [here](https://medium.com/featurepreneur/how-to-connect-github-to-heroku-be6ff27419d3). The deployed app can be found here: [Corals Health](https://corals-health-3265febe1ec7.herokuapp.com/).
 
+### Bugs
+
+* The stack of the project was changes from 22 to 20 to match the python version supported by Heroku
+
+* Extra large files were added to .slugignore files to reduce the siThe slug size was also too reduce the suze of the slug file.
+
+### Maintenance
+
+
+
+#### Credits
+[Code Institute Malaria Walk Through Project](https://github.com/Code-Institute-Solutions/WalkthroughProject01): The project was used as the starting point with a major adaptation of the code. The author took from it the logic of the jupyter notebooks structure and organisation (data acquisition -> visualisation -> ML), data visalisation, code for data ackquisition from Kaggle and splitting the dataset into 'test' 'validation' and 'train' datasets. The author also used this project as an example of the [Streamlit app](https://malaria-predictor.onrender.com) architecture.
+
 #### Acknowledgements
-
-
-
+I thank my mentor **Precious Ijege** for his time and support during the project preparation.
 
 #### Contact information
 
@@ -441,14 +505,13 @@ This project was deployed in a manual mode following the steps, described [here]
 
 ### Comments
 
-### -1-
+#### Manual data check
 
 During the initial attempts of the model_1 (see [Model Building section](#model-building)) training and validation, it was discovered that the **Model_1** behaves well and stops training according to pre-defined stopping criteria. However, the model showed quite pure generalisation when processing unseen data. This could be an indication of overfitting. This dictated the need to have a closer look at the dataset. During manual check, it was discovered that the [dataset](https://www.kaggle.com/datasets/sonainjamil/bhd-corals) contains some images in wrong folders.  The dataset used in this work was assembled and preprocessed in the context of the project, published by [Jamil <em>et al.</em>](https://www.mdpi.com/2504-2289/5/4/53). Although, the [dataset](https://www.kaggle.com/datasets/sonainjamil/bhd-corals) of coral images is labelled as 'Healthy', 'Bleached' and 'Dead', the work was focused on distinguishing beween 'Healthy' and 'Bleached' (binary classification task) using 'specific deep convolutional neural networks such as AlexNet, GoogLeNet, VGG-19, ResNet-50, Inception v3, and CoralNet. (c)' The subset labelled as 'Dead' was treated as 'Bleached'. Attempt to train the model to categorise the data into three groups: 'Bleached', 'Dead' and 'Healthy' (this work) resulted in poor genaralisation and overfitting. Manual inspection of the dataset revealed that some of the 'Dead' corals were labelled as 'Bleached' and the other way around. Futhermore, some of the 'Bleached' corals were marked as 'Healthy'. This image misplacement may be less critical for binary classification, but crucial for training models for more categories. Therefore, the author had to visually inspect the entire dataset and manually move some images in downloaded dataset where the misplacement was obvous, into more appropriate folders, following the [description](https://en.wikipedia.org/wiki/Coral_bleaching). It must also be mentioned that apart from the described dataset cross-contamination, the original dataset contains stranger data, such as this garden stuff: ![garden stuff.](./assets/images/salad_leaf_coral.jpg)
 
 
+#### Prediction results
 
-
-
-
-
-
+The model can potentially show umbiguous result with nearly equal probabylities accross the labels. Well... in this case the decision is left to the user's discretion. After all, the model gives 85 % of accuracy and two major considerations must be taken into account:
+1) The dataset used in this project has a gret deal to be desired. The author gave an extensive account to it in this document, and
+2) Unlike the case of infected/ununfected living things ([e.g.](https://malaria-predictor.onrender.com/)), it is much harder (from the biological standpoint too) to draw a sharp borderline between 'bleached' and 'dead', and 'bleached' and 'healthy' states.

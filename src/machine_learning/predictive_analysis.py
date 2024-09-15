@@ -8,11 +8,11 @@ from tensorflow.keras.models import load_model
 from PIL import Image
 from src.data_management import load_pkl_file
 
+
 def download_model(url, local_path):
     """
     Helper function to download a model file from a URL and save it locally.
     """
-    # Ensure the target folder exists
     os.makedirs(os.path.dirname(local_path), exist_ok=True)
 
     # Get the model file
@@ -20,6 +20,7 @@ def download_model(url, local_path):
     with open(local_path, 'wb') as file:
         file.write(response.content)
     print("Downloaded model to:", local_path)
+
 
 def resize_input_image(img, version):
     """
@@ -31,74 +32,57 @@ def resize_input_image(img, version):
 
     return my_image
 
-def load_model_and_predict(my_image, version):
+
+def load_model_and_predict(my_image, image_name, version):
     """
     Load and perform ML prediction over live images and plot model comparison
     """
-    # Ensure to use the raw GitHub URLs for direct file access
-    # model_1_url = 'https://github.com/DrSYakovlev/corals_health/raw/main/outputs/v4/model_1.h5'
-    # model_2_url = 'https://github.com/DrSYakovlev/corals_health/raw/main/outputs/v4/model_2.h5'
-    model_3_url = 'https://github.com/DrSYakovlev/corals_health/raw/main/outputs/v4/model_3.h5'
+    # Provide model_1 and model_2 url for multimodel
+    model_3_url = (
+        'https://github.com/DrSYakovlev/corals_health/raw/main/'
+        'outputs/v4/model_3.h5')
 
     # Local paths where the models will be saved
-    # model_1_path = 'saved_models/model_1.h5'
-    # model_2_path = 'saved_models/model_2.h5'
+    # Provide local path for model_1 and model_2
+    # for multimodel
     model_3_path = 'saved_models/model_3.h5'
 
     # Download models if they don't exist locally
-    # if not os.path.exists(model_1_path):
-    #     download_model(model_1_url, model_1_path)
-    # if not os.path.exists(model_2_path):
-    #     download_model(model_2_url, model_2_path)
     if not os.path.exists(model_3_path):
         download_model(model_3_url, model_3_path)
 
     # Load the models
-    # model_1 = load_model(model_1_path)
-    # model_2 = load_model(model_2_path)
+    # Load model_1 and model_2 for multimodel
     model_3 = load_model(model_3_path)
 
     # Perform predictions
-    # pred_proba_model_1 = model_1.predict(my_image)[0]
-    # pred_proba_model_2 = model_2.predict(my_image)[0]
-    pred_proba_model_3 = model_3.predict(my_image)[0]    
-    
+    # Perform prediction on model_1 and model_2
+    # for multimodel
+    pred_proba_model_3 = model_3.predict(my_image)[0]
+
     # Mapping predictions to target classes
-    target_map = {v: k for k, v in {'Bleached': 0, 'Dead': 1, 'Healthy': 2}.items()}
-    # prob_per_class_model_1 = pd.DataFrame(data=[pred_proba_model_1], columns=target_map.values())
-    # prob_per_class_model_2 = pd.DataFrame(data=[pred_proba_model_2], columns=target_map.values())
-    prob_per_class_model_3 = pd.DataFrame(data=[pred_proba_model_3], columns=target_map.values())
+    target_map = {
+        v: k
+        for k, v in {
+            'Bleached': 0,
+            'Dead': 1,
+            'Healthy': 2
+         }.items()}
+
+    # Add prob_per_class_model_1 and _model_2 for multimodel
+    prob_per_class_model_3 = pd.DataFrame(
+        data=[pred_proba_model_3], columns=target_map.values())
 
     combined_df = pd.concat([
-    #    prob_per_class_model_1.assign(Model='Model 1'),
-    #    prob_per_class_model_2.assign(Model='Model 2'),
+        # prob_per_class_model_1 and model_2: .assign() for multimodel
         prob_per_class_model_3.assign(Model='Model 3')
     ]).melt(id_vars=['Model'], var_name='Results', value_name='Probability')
 
-    # Plot the bar chart, grouped by model:
-    """
-    fig = px.bar(
-        combined_df,
-        x='Model',
-        y='Probability',
-        color='Results',
-        barmode='group',
-        range_y=[0, 1],
-        width=600,
-        height=400,
-        template='seaborn',
-        title="Probability by Model"
-    )    
-    st.plotly_chart(fig)
-    
-    """ 
-
-    # Plot the bar chart, grouped by Coral Health State (Results):
     fig = px.bar(
         combined_df,
         x='Results',
         y='Probability',
-        # color='Model',
+        # assign here: color='Model', for multi-model app
         barmode='group',
         range_y=[0, 1],
         width=600,
@@ -108,3 +92,52 @@ def load_model_and_predict(my_image, version):
     )
     st.plotly_chart(fig)
 
+    # Determine the most likely class or uncertainty message
+    max_prob = prob_per_class_model_3.max(axis=1).values[0]
+    predicted_class = prob_per_class_model_3.idxmax(axis=1).values[0]
+
+    if max_prob > 0.5:
+        message = f"The model says that the colony is the\n"
+        "most likely **{predicted_class}** (more than 50 % probability)."
+        result = f"{predicted_class}"
+    else:
+        message = "The model is **not sure** (the probability for each\n"
+        "group is below 50 %). Please, try another image of the colony."
+        result = "not sure"
+
+    st.success(message)
+
+
+def final_report(image_name, my_image):
+    """
+    Genarate final report
+    """
+    model_3_url = (
+        'https://github.com/DrSYakovlev/corals_health/raw/main/'
+        'outputs/v4/model_3.h5')
+
+    model_3_path = 'saved_models/model_3.h5'
+    if not os.path.exists(model_3_path):
+        download_model(model_3_url, model_3_path)
+    model_3 = load_model(model_3_path)
+    pred_proba_model_3 = model_3.predict(my_image)[0]
+    target_map = {
+        v: k
+        for k, v in {
+            'Bleached': 0,
+            'Dead': 1,
+            'Healthy': 2
+         }.items()}
+    prob_per_class_model_3 = pd.DataFrame(
+        data=[pred_proba_model_3], columns=target_map.values())
+    max_prob = prob_per_class_model_3.max(axis=1).values[0]
+    predicted_class = prob_per_class_model_3.idxmax(axis=1).values[0]
+    if max_prob > 0.5:
+        result = f"{predicted_class}"
+    else:
+        result = "not sure"
+    report_df = pd.DataFrame({
+        'id': [image_name],
+        '---': [result]
+    })
+    st.dataframe(report_df)

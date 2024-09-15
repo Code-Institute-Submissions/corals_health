@@ -1,8 +1,10 @@
 import streamlit as st
 
 
-
 class MultiPage:
+    """
+    Defines multipage app
+    """
 
     def __init__(self, app_name) -> None:
         self.pages = []
@@ -15,5 +17,6 @@ class MultiPage:
 
     def run(self):
         st.title(self.app_name)
-        page = st.sidebar.selectbox('📜 Select from menu', self.pages, format_func=lambda page: page['title'])
+        page = st.sidebar.selectbox('📜 Select from menu', self.pages,
+                                    format_func=lambda page: page['title'])
         page['function']()
