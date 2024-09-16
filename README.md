@@ -537,8 +537,8 @@ Please, **be advise**, that:
 
 #### Credits
 [Code Institute Malaria Walk Through Project](https://github.com/Code-Institute-Solutions/WalkthroughProject01): The project was used as the starting point with a major adaptation of the code. The author took from it:
-* The **general structure** of the jupyter notebook structure and organisation (data acquisition -> visualisation -> ML) and data visalisation
-* **Code** for data ackquisition from Kaggle and splitting the dataset into 'test' 'validation' and 'train' datasets
+* The **general logic** of the jupyter notebook structure and organisation (data acquisition -> visualisation -> ML) and data visalisation
+* **Code** for data acquisition from Kaggle and splitting the dataset into 'test' 'validation' and 'train' datasets
 * **Code** for data augmentation
 * The author also used this project as an **example** of the [Streamlit app](https://malaria-predictor.onrender.com) architecture.
 
