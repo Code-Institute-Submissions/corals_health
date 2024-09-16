@@ -10,7 +10,7 @@ Welcome to the "Coral's Health" ML project. This project was inspired by several
 
 This goal will be achieved via addressing two business objectives:
 1. Compare average images of different labels ('Healthy', 'Bleached', 'Dead', in pairs) (data visualisation task), and
-2. Develop and train ML model which would predict the group where the picture unseen by a model belongs (ML categorisation task).
+2. Develop and train ML model which would predict the group to which an unseen picture belongs (ML categorisation task).
 <hr>
 
 
@@ -88,8 +88,8 @@ Addressing these requirements sucessfully will (a)reduce an amount of tedious/re
 
 
 #### Data Understanding
-Several datasets from [Kaggle](https://www.kaggle.com) were reviewed, primarily containing images labeled as 'Healthy' and 'Bleached'. However, to address the three-category classification ('Healthy', 'Bleached', 'Dead'), the [BHD Corals dataset](https://www.kaggle.com/datasets/sonainjamil/bhd-corals) with 1,572 labeled images was selected. Initial analysis indicated potential labeling inconsistencies, necessitating further data preparation. It was observed in particular that 'Bleached' corals group partially encompasses two subgroups: 'Bleached' and 'Dead'. The aim of the project and the idea of the author was to check if a ML model (or models) can be extended and trained to enable gategorical classification of images of corals into these **three** groups ('Bleached', 'Healthy' and 'Dead') rather than just **two** ('Healthy' and 'Bleached').<br>
-The datasets where coral images would be pre-labelled according to those three categories are much more scarce. This dataset was selected therefore despite some cross contamination which author was expecting to accommodate. The images in the selected dataset were preprocessed by the owner of dataset to have identical 227 x 227 dimension. Data preparation included: (i) cleaning (ii) augmentation.
+Several datasets from [Kaggle](https://www.kaggle.com) were reviewed, primarily containing images labeled as 'Healthy' and 'Bleached'. However, to address the three-category classification ('Healthy', 'Bleached', 'Dead'), the [BHD Corals dataset](https://www.kaggle.com/datasets/sonainjamil/bhd-corals) with 1,572 labeled images was selected. Initial analysis indicated potential labeling inconsistencies, necessitating further data preparation. It was observed in particular that 'Bleached' corals group partially encompasses two subgroups: 'Bleached' and 'Dead'. The aim of the project and the idea of the author was to check if a ML model (or models) can be extended and trained to enable categorical classification of images of corals into these **three** groups ('Bleached', 'Healthy' and 'Dead') rather than just **two** ('Healthy' and 'Bleached').<br>
+The datasets where coral images would be pre-labelled according to those three categories are much more scarce. This dataset was selected therefore despite some cross contamination which author was expecting to accommodate. The images in the selected dataset were preprocessed by the owner of dataset to have identical 227 x 227 dimension. Data preparation included: (i) cleaning, and (ii) augmentation.
 
 #### Data Preparation
 Data preparation involved cleaning the dataset by removing non-image files and grayscale images, followed by manual verification to correct mislabeled entries. Due to the limited number of images, data augmentation techniques were applied to enhance the dataset's diversity and improve model generalisation.
@@ -121,7 +121,7 @@ The dataset does not contain any additional information, such as geographic, cli
 Standard preprocessing steps were applied, including image resizing and normalisation. No additional feature engineering was performed beyond data augmentation to enhance dataset diversity. The [dataset](https://www.kaggle.com/datasets/sonainjamil/bhd-corals) found for this project contains 1572 labelled images. See corresponding section in [Jupyter notebooks, resulst and visualisation](#results-and-visualisation) chapter for visual representation of image number distribution in various subsets and labels. The total number is very modest which is the cause of poor generalisation initially observed for trained model. In order to improve model training and generalisation when analysing previously unseen data, augmentation process was implemented [2_visualisation.ipynb](./jupyter_notebooks/2_visualisation.ipynb).
 
 #### Model Building
-Three CNN models were developed with increasing complexity to address overfitting:
+Three CNN models were developed with increasing complexity to mitigate overfitting:
 
 - **Model_1**: Basic CNN inspired by the [Malaria Detector](https://github.com/Code-Institute-Solutions/WalkthroughProject01) project.
 - **Model_2**: Added dropout layers to reduce overfitting.
@@ -241,7 +241,7 @@ def create_tf_model_3():
 ```
 
 #### Model Evaluation
-Model_1, Model_2 and Model_3 were evaluated using the test set and accuracy and loss metrics. The results are shown below:
+Model_1, Model_2 and Model_3 were evaluated using the test set and accuracy and loss metrics. Results are shown below:
 
 **Model_1**
 ```
@@ -513,5 +513,5 @@ During the initial attempts of the model_1 (see [Model Building section](#model-
 #### Prediction results
 
 The model can potentially show umbiguous result with nearly equal probabylities accross the labels. Well... in this case the decision is left to the user's discretion. After all, the model gives 85 % of accuracy and two major considerations must be taken into account:
-1) The dataset used in this project has a gret deal to be desired. The author gave an extensive account to it in this document, and
+1) The dataset used in this project has a great deal to be desired. The author gave an extensive account of it throughout this document, and
 2) Unlike the case of infected/ununfected living things ([e.g.](https://malaria-predictor.onrender.com/)), it is much harder (from the biological standpoint too) to draw a sharp borderline between 'bleached' and 'dead', and 'bleached' and 'healthy' states.

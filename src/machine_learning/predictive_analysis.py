@@ -37,13 +37,13 @@ def load_model_and_predict(my_image, image_name, version):
     """
     Load and perform ML prediction over live images and plot model comparison
     """
-    # Provide model_1 and model_2 url for multimodel
+    # Provide here model_1 and model_2 url for multimodel
     model_3_url = (
         'https://github.com/DrSYakovlev/corals_health/raw/main/'
         'outputs/v4/model_3.h5')
 
     # Local paths where the models will be saved
-    # Provide local path for model_1 and model_2
+    # Provide here local path for model_1 and model_2
     # for multimodel
     model_3_path = 'saved_models/model_3.h5'
 
@@ -52,11 +52,11 @@ def load_model_and_predict(my_image, image_name, version):
         download_model(model_3_url, model_3_path)
 
     # Load the models
-    # Load model_1 and model_2 for multimodel
+    # Load here model_1 and model_2 for multimodel
     model_3 = load_model(model_3_path)
 
     # Perform predictions
-    # Perform prediction on model_1 and model_2
+    # Perform here prediction on model_1 and model_2
     # for multimodel
     pred_proba_model_3 = model_3.predict(my_image)[0]
 
@@ -69,12 +69,12 @@ def load_model_and_predict(my_image, image_name, version):
             'Healthy': 2
          }.items()}
 
-    # Add prob_per_class_model_1 and _model_2 for multimodel
+    # Add here prob_per_class_model_1 and _model_2 for multimodel
     prob_per_class_model_3 = pd.DataFrame(
         data=[pred_proba_model_3], columns=target_map.values())
 
     combined_df = pd.concat([
-        # prob_per_class_model_1 and model_2: .assign() for multimodel
+        # prob_per_class_model_1 and model_2: .assign() here for multimodel
         prob_per_class_model_3.assign(Model='Model 3')
     ]).melt(id_vars=['Model'], var_name='Results', value_name='Probability')
 
@@ -97,15 +97,13 @@ def load_model_and_predict(my_image, image_name, version):
     predicted_class = prob_per_class_model_3.idxmax(axis=1).values[0]
 
     if max_prob > 0.5:
-        message = f"The model says that the colony is the\n"
-        "most likely **{predicted_class}** (more than 50 % probability)."
-        result = f"{predicted_class}"
+        st.success(f"The model says that the colony is the\n"
+                   f"most likely **{predicted_class}**\n"
+                   "(more than 50 % probability).")
     else:
-        message = "The model is **not sure** (the probability for each\n"
-        "group is below 50 %). Please, try another image of the colony."
-        result = "not sure"
-
-    st.success(message)
+        st.success(f"The model is **not sure** (the probability for each\n"
+                   "group is below 50 %). Please,\n"
+                   "try another image of the colony.")
 
 
 def final_report(image_name, my_image):

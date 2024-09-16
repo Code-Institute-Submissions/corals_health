@@ -41,7 +41,7 @@ def business_case() -> None:
         "In 2017, the bleaching extended into the central region of the\n"
         "reef. The average interval between bleaching events has halved\n"
         "between 1980 and 2016,\n"
-        "Wikipedia article](https://en.wikipedia.org/wiki/Coral_bleaching).\n"
+        "[Wikipedia article](https://en.wikipedia.org/wiki/Coral_bleaching).\n"
         )
 
     st.success(
