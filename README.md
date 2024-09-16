@@ -51,11 +51,13 @@ This goal will be achieved via addressing two business objectives:
 
 ### [VII. How to Run the Project](#how-to-run-the-project)
 
-### [VIII. Deployment](#deployment-1)
+### [VIII. Data Analysis and Machine Learning Libraries](#data-analysis-and-machine-learning-libraries)
 
-### [IX. Bugs](#bugs)
+### [IX. Deployment](#deployment-1)
 
-### [X. Maintenance](#maintenance)
+### [X. Bugs](#bugs)
+
+### [XI. Maintenance](#maintenance)
 
 #### [Credits](#credits-1)
 
@@ -485,10 +487,35 @@ For a successful deploymetnt on [Heroku](https://www.heroku.com/) , the next fil
 5. **Access the Dashboard**
     - Open the provided URL in your browser to interact with the dashboard.
 
+### Data Analysis and Machine Learning Libraries
+
+
+**Numpy** is an open-source, python library used for handling arrays.
+
+**Pandas** is an open-source, python package used for working with data sets (in the form of dataframes).
+
+**Matplotlib** is a cross-platform pythin library for data visualization and graphical plotting.
+
+**Seaborn** is Python data visualization library built on top of Matplotlib.
+
+**Plotly** is an interactive, open-soource, and browser-based graphing package. Used to create visualisations within Jupyter notebooks to present the data.
+
+**Tensorflow** is an open-source machine learning platform focused on deep neural networks.
+
+**Shutil** file copying and removal module.
+
+**Streamlit** is used to create web-based dashboards for data science and machine learning.
+
+**Joblib** is a set of tools to provide lightweighting pipelining in Python.
+
+**PIL** is a free and open-source additional library for Python that adds support for opening, manipulating, and saving many different image file formats.
+
+**Keras** is an open-source neural network library written in Python that provides an API for building and training deep learning models. It acts as an interface for TensorFlow.
+
 
 ### Deployment
 
-This project was deployed in a manual mode following the steps, described [here](https://medium.com/featurepreneur/how-to-connect-github-to-heroku-be6ff27419d3). The deployed app can be found here: [Corals Health](https://corals-health-3265febe1ec7.herokuapp.com/).
+This project was deployed in a **manual mode** following the steps, described [here](https://medium.com/featurepreneur/how-to-connect-github-to-heroku-be6ff27419d3). The deployed app can be found here: [Corals Health](https://corals-health-3265febe1ec7.herokuapp.com/).
 
 ### Bugs
 
@@ -510,9 +537,10 @@ Please, **be advise**, that:
 
 #### Credits
 [Code Institute Malaria Walk Through Project](https://github.com/Code-Institute-Solutions/WalkthroughProject01): The project was used as the starting point with a major adaptation of the code. The author took from it:
-* The logic of the jupyter notebook structure and organisation (data acquisition -> visualisation -> ML), data visalisation
-* Code for data ackquisition from Kaggle and splitting the dataset into 'test' 'validation' and 'train' datasets
-* The author also used this project as an example of the [Streamlit app](https://malaria-predictor.onrender.com) architecture.
+* The **general structure** of the jupyter notebook structure and organisation (data acquisition -> visualisation -> ML) and data visalisation
+* **Code** for data ackquisition from Kaggle and splitting the dataset into 'test' 'validation' and 'train' datasets
+* **Code** for data augmentation
+* The author also used this project as an **example** of the [Streamlit app](https://malaria-predictor.onrender.com) architecture.
 
 #### Acknowledgements
 I thank my mentor **Precious Ijege** for his time and support during the project preparation.
